@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SonoGuard.Views.MedidorPage"
+             Title="Medidor de Ruido"
+             BackgroundColor="#1A1A2E">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label x:Name="LabelSaludo" FontSize="15" TextColor="#A0A0B0"
+                   HorizontalOptions="Center"/>
+
+            <Border StrokeShape="RoundRectangle 20"
+                    Stroke="#0F3460" BackgroundColor="#16213E" Padding="20">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Nivel de Ruido Actual"
+                           TextColor="White" FontSize="16" FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Label x:Name="LabelDb" Text="-- dB"
+                           FontSize="64" FontAttributes="Bold"
+                           TextColor="White" HorizontalOptions="Center"/>
+
+                    <Label x:Name="LabelNivelDesc" Text="Esperando medición..."
+                           FontSize="18" FontAttributes="Bold"
+                           TextColor="#A0A0B0" HorizontalOptions="Center"/>
+
+                    <Grid RowDefinitions="Auto,Auto">
+                        <Border Grid.Row="0" StrokeShape="RoundRectangle 6"
+                                Stroke="Transparent" BackgroundColor="#0F3460"
+                                HeightRequest="20">
+                            <Border x:Name="BarraProgreso"
+                                    StrokeShape="RoundRectangle 6"
+                                    BackgroundColor="#4CAF50"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="2"/>
+                        </Border>
+                        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" Margin="0,2">
+                            <Label Grid.Column="0" Text="0" TextColor="#606070" FontSize="10"/>
+                            <Label Grid.Column="1" Text="30" TextColor="#606070" FontSize="10" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="60" TextColor="#606070" FontSize="10" HorizontalOptions="Center"/>
+                            <Label Grid.Column="3" Text="90" TextColor="#606070" FontSize="10" HorizontalOptions="Center"/>
+                            <Label Grid.Column="4" Text="120dB" TextColor="#606070" FontSize="10" HorizontalOptions="End"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6" Margin="0,4">
+                        <Border Grid.Column="0" StrokeShape="RoundRectangle 8"
+                                BackgroundColor="#2E7D32" Padding="4">
+                            <Label Text="&#60;55dB&#10;Normal" TextColor="White"
+                                   FontSize="10" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 8"
+                                BackgroundColor="#827717" Padding="4">
+                            <Label Text="55-70&#10;Moderado" TextColor="White"
+                                   FontSize="10" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="2" StrokeShape="RoundRectangle 8"
+                                BackgroundColor="#E65100" Padding="4">
+                            <Label Text="70-85&#10;Elevado" TextColor="White"
+                                   FontSize="10" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="3" StrokeShape="RoundRectangle 8"
+                                BackgroundColor="#B71C1C" Padding="4">
+                            <Label Text="&#62;85dB&#10;Peligroso" TextColor="White"
+                                   FontSize="10" HorizontalTextAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button x:Name="BtnIniciar" Grid.Column="0"
+                        Text="Iniciar" Clicked="OnIniciarClicked"
+                        BackgroundColor="#2E7D32" TextColor="White"
+                        FontAttributes="Bold" CornerRadius="20" HeightRequest="48"/>
+                <Button x:Name="BtnDetener" Grid.Column="1"
+                        Text="Detener" Clicked="OnDetenerClicked"
+                        BackgroundColor="#616161" TextColor="White"
+                        FontAttributes="Bold" CornerRadius="20" HeightRequest="48"
+                        IsEnabled="False"/>
+            </Grid>
+
+            <Border StrokeShape="RoundRectangle 20"
+                    Stroke="#0F3460" BackgroundColor="#16213E" Padding="20">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Registrar Evidencia"
+                           TextColor="White" FontSize="16" FontAttributes="Bold"/>
+
+                    <Label Text="Ubicación / Dirección" TextColor="#A0A0B0" FontSize="12"/>
+                    <Border StrokeShape="RoundRectangle 10"
+                            Stroke="#0F3460" BackgroundColor="#1A1A2E">
+                        <Entry x:Name="EntryUbicacion"
+                               Placeholder="Ej: Av. Principal 123, sector centro"
+                               TextColor="White" PlaceholderColor="#606070"
+                               BackgroundColor="Transparent" Margin="12,0"/>
+                    </Border>
+
+                    <Label Text="Descripción del ruido" TextColor="#A0A0B0" FontSize="12"/>
+                    <Border StrokeShape="RoundRectangle 10"
+                            Stroke="#0F3460" BackgroundColor="#1A1A2E">
+                        <Editor x:Name="EditorDescripcion"
+                                Placeholder="Describe el origen del ruido..."
+                                TextColor="White" PlaceholderColor="#606070"
+                                BackgroundColor="Transparent"
+                                AutoSize="TextChanges"
+                                MinimumHeightRequest="70" Margin="12,4"/>
+                    </Border>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="CheckDenuncia" Color="#E94560"/>
+                        <Label Text="Marcar como denuncia formal"
+                               TextColor="White" FontSize="14" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Button Text="Guardar Evidencia"
+                            Clicked="OnGuardarClicked"
+                            BackgroundColor="#E94560" TextColor="White"
+                            FontAttributes="Bold" CornerRadius="20"
+                            HeightRequest="48" HorizontalOptions="Fill"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Grid.Column="0" Text="Historial"
+                        Clicked="OnHistorialClicked"
+                        BackgroundColor="#16213E" TextColor="White"
+                        BorderColor="#0F3460" BorderWidth="1"
+                        CornerRadius="20" HeightRequest="48"/>
+                <Button Grid.Column="1" Text="Cerrar Sesión"
+                        Clicked="OnCerrarSesionClicked"
+                        BackgroundColor="#16213E" TextColor="#E94560"
+                        BorderColor="#E94560" BorderWidth="1"
+                        CornerRadius="20" HeightRequest="48"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

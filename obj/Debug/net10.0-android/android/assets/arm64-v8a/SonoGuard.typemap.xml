@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="SonoGuard" mvid="ae3327dddfdd43b1a0cc4837c074d18b">
+  <java-to-managed>
+    <entry java-name="crc64fb464eb378b632f8/MainActivity" managed-name="SonoGuard.MainActivity, SonoGuard" managed-type-token-id="33554441" />
+    <entry java-name="crc64fb464eb378b632f8/MainApplication" managed-name="SonoGuard.MainApplication, SonoGuard" managed-type-token-id="33554442" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc64fb464eb378b632f8/MainActivity" managed-name="SonoGuard.MainActivity, SonoGuard" managed-type-token-id="33554441" />
+    <entry java-name="crc64fb464eb378b632f8/MainApplication" managed-name="SonoGuard.MainApplication, SonoGuard" managed-type-token-id="33554442" />
+  </managed-to-java>
+</api>

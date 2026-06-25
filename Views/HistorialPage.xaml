@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SonoGuard.Views.HistorialPage"
+             Title="Historial"
+             BackgroundColor="#1A1A2E">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <VerticalStackLayout Grid.Row="0" Padding="20,16,20,0" Spacing="10">
+            <Label Text="Mis Registros" TextColor="White"
+                   FontSize="22" FontAttributes="Bold"/>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button x:Name="BtnTodos" Grid.Column="0"
+                        Text="Todas" Clicked="OnFiltroTodosClicked"
+                        BackgroundColor="#E94560" TextColor="White"
+                        CornerRadius="20" HeightRequest="38" FontSize="13"/>
+                <Button x:Name="BtnDenuncias" Grid.Column="1"
+                        Text="Solo Denuncias" Clicked="OnFiltroDenunciasClicked"
+                        BackgroundColor="#16213E" TextColor="#A0A0B0"
+                        BorderColor="#0F3460" BorderWidth="1"
+                        CornerRadius="20" HeightRequest="38" FontSize="13"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1" Margin="20,10,20,0"
+                StrokeShape="RoundRectangle 16"
+                Stroke="#0F3460" BackgroundColor="#16213E" Padding="16">
+            <Grid ColumnDefinitions="*,*,*">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label x:Name="LabelTotal" Text="0"
+                           FontSize="24" FontAttributes="Bold"
+                           TextColor="#E94560" HorizontalOptions="Center"/>
+                    <Label Text="Total" FontSize="11" TextColor="#A0A0B0"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                    <Label x:Name="LabelMax" Text="0 dB"
+                           FontSize="22" FontAttributes="Bold"
+                           TextColor="Orange" HorizontalOptions="Center"/>
+                    <Label Text="Máximo" FontSize="11" TextColor="#A0A0B0"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Spacing="2">
+                    <Label x:Name="LabelPromedio" Text="0 dB"
+                           FontSize="22" FontAttributes="Bold"
+                           TextColor="LightGreen" HorizontalOptions="Center"/>
+                    <Label Text="Promedio" FontSize="11" TextColor="#A0A0B0"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <CollectionView x:Name="ListaMediciones" Grid.Row="2"
+                        Margin="20,10,20,20"
+                        SelectionMode="Single"
+                        SelectionChanged="OnMedicionSeleccionada">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" Spacing="12" Margin="0,40">
+                    <Image Source="ruidologo.png" WidthRequest="64" HeightRequest="64"
+                           HorizontalOptions="Center" Opacity="0.4"/>
+                    <Label Text="No hay registros aún"
+                           TextColor="#A0A0B0" FontSize="16" HorizontalOptions="Center"/>
+                    <Label Text="Ve al medidor y guarda tu primera evidencia"
+                           TextColor="#606070" FontSize="13"
+                           HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Eliminar"
+                                           BackgroundColor="#B71C1C"
+                                           Invoked="OnEliminarSwipe"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border Margin="0,4" StrokeShape="RoundRectangle 16"
+                                Stroke="#0F3460" BackgroundColor="#16213E" Padding="16">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                                <Border Grid.Column="0"
+                                        StrokeShape="RoundRectangle 26"
+                                        BackgroundColor="{Binding ColorNivel}"
+                                        WidthRequest="52" HeightRequest="52">
+                                    <Image Source="ruidologo.png"
+                                           WidthRequest="32" HeightRequest="32"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="3"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding NivelDbTexto}"
+                                           TextColor="White" FontSize="20"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding NivelDescripcion}"
+                                           TextColor="{Binding ColorNivel}" FontSize="13"/>
+                                    <Label Text="{Binding Ubicacion}"
+                                           TextColor="#A0A0B0" FontSize="12"
+                                           LineBreakMode="TailTruncation" MaxLines="1"/>
+                                    <Label Text="{Binding FechaHoraTexto}"
+                                           TextColor="#606070" FontSize="11"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2"
+                                                     VerticalOptions="Center" Spacing="4">
+                                    <Border IsVisible="{Binding EsDenuncia}"
+                                            StrokeShape="RoundRectangle 10"
+                                            BackgroundColor="#E94560" Padding="6,3">
+                                        <Label Text="Denuncia" TextColor="White"
+                                               FontSize="10" FontAttributes="Bold"/>
+                                    </Border>
+                                    <Label Text="›" TextColor="#606070" FontSize="22"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SonoGuard.Views.LoginPage"
+             Title="Iniciar Sesión"
+             BackgroundColor="#1A1A2E">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,50,30,30" Spacing="16" VerticalOptions="Center">
+
+            <Image Source="ruidologo.png"
+                   WidthRequest="150" HeightRequest="150"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Bienvenido de vuelta"
+                   FontSize="26" FontAttributes="Bold"
+                   TextColor="White" HorizontalOptions="Center"/>
+
+            <Label Text="Inicia sesión para continuar"
+                   FontSize="14" TextColor="#A0A0B0"
+                   HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="#0F3460" BackgroundColor="#16213E">
+                <Entry x:Name="EntryEmail" Placeholder="Correo electrónico"
+                       Keyboard="Email" TextColor="White"
+                       PlaceholderColor="#808090" BackgroundColor="Transparent"
+                       Margin="12,0"/>
+            </Border>
+
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="#0F3460" BackgroundColor="#16213E">
+                <Entry x:Name="EntryPassword" Placeholder="Contraseña"
+                       IsPassword="True" TextColor="White"
+                       PlaceholderColor="#808090" BackgroundColor="Transparent"
+                       Margin="12,0"/>
+            </Border>
+
+            <Label x:Name="LabelError" TextColor="#E94560"
+                   FontSize="13" HorizontalOptions="Center" IsVisible="False"/>
+
+            <Button Text="Entrar"
+                    Clicked="OnLoginClicked"
+                    BackgroundColor="#E94560" TextColor="White"
+                    FontSize="16" FontAttributes="Bold"
+                    CornerRadius="25" HeightRequest="52"
+                    HorizontalOptions="Fill" Margin="0,8,0,0"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label Text="¿No tienes cuenta?" TextColor="#A0A0B0"
+                       FontSize="14" VerticalOptions="Center"/>
+                <Button Text="Regístrate"
+                        Clicked="OnRegistroClicked"
+                        BackgroundColor="Transparent" TextColor="#E94560"
+                        FontSize="14" Padding="4,0"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
